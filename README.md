@@ -1,317 +1,172 @@
-MERN Blog - Full Stack Blog Application
-A modern, full-featured blog application built with the MERN stack (MongoDB, Express.js, React.js, Node.js). This application demonstrates seamless integration between front-end and back-end components with complete CRUD functionality, user authentication, and advanced features.
+# Coffee Shop Hub ☕️  
 
-Features
-Core Features
-User Authentication - Register, login, and logout functionality with JWT
+Full-stack MERN experience for managing a specialty coffee blog, complete with recipe curation, tasting notes, and barista workflows.
 
-Blog Post Management - Create, read, update, and delete blog posts
+## Overview
 
-Categories - Organize posts with categories
+Coffee Shop Hub demonstrates deep integration across MongoDB, Express.js, React, and Node.js. It exposes a rich REST API, modern React front end, role-based authoring tools, and interactive community features (likes, ratings, comments).
 
-Comments System - Add comments to blog posts
+## Features
 
-Responsive Design - Mobile-friendly UI
+- **Content Management**
+  - CRUD for beverages/posts with rich metadata (categories, tags, pricing, featured images).
+  - Optimistic likes, ratings, and featured flags.
+- **Community Tools**
+  - Commenting with optional 1–5 ratings.
+  - Real-time optimistic likes and tastings.
+- **Discoverability**
+  - Search by keyword, filter by category, paginate results.
+  - Hero cards, featured badges, contextual metadata.
+- **Advanced Enhancements**
+  - Role-aware authoring (admin / barista / customer).
+  - Image uploads via local storage (switchable to Cloudinary).
+  - Authentication with JWT (cookies + localStorage token sync).
+  - Protected routes + profile management.
 
-Advanced Features
-Image Uploads - Support for featured images in posts
+## Tech Stack
 
-Search & Filter - Search posts by title/content and filter by categories
+- **Front End**: React 19, React Router 7, Vite, React Hook Form + Yup, TanStack Query, Context API
+- **Back End**: Node.js, Express 5, Mongoose 8, JWT, Multer, Cloudinary (optional)
+- **Database**: MongoDB
+- **Utilities**: express-validator, bcryptjs, morgan, cors, dotenv
 
-Pagination - Efficient post browsing with pagination
+## Project Structure
 
-User Authorization - Role-based access control (user/admin)
+```
+mern-stack/
+├── client/               # Vite + React front end
+│   ├── env.example
+│   └── src/
+│       ├── components/
+│       ├── context/
+│       ├── hooks/
+│       ├── pages/
+│       └── services/
+├── server/               # Express + MongoDB back end
+│   ├── env.example
+│   ├── config/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── services/
+│   └── utils/
+├── README.md
+└── .gitignore
+```
 
-View Counts - Track post popularity
+## Prerequisites
 
-Tech Stack
-Frontend
-React 18 - Modern React with hooks
+- Node.js v18+
+- npm 9+
+- MongoDB (local instance or Atlas URL)
 
-React Router DOM - Client-side routing
+## Environment Variables
 
-Axios - HTTP client for API calls
+Duplicate the provided examples and adjust for your environment:
 
-Context API - State management
+```bash
+cp server/env.example server/.env
+cp client/env.example client/.env
+```
 
-Vite - Fast build tool and dev server
+### Server `.env`
 
-Backend
-Node.js - Runtime environment
+| Key                    | Description                                |
+|------------------------|--------------------------------------------|
+| `PORT`                 | API port (default `5000`)                  |
+| `MONGODB_URI`          | Mongo connection string                    |
+| `JWT_SECRET`           | Secret for signing JWT tokens              |
+| `JWT_ACCESS_EXPIRES_IN`| Token lifetime (e.g. `1d`)                 |
+| `CLIENT_URL`           | Allowed client origin                      |
+| `NODE_ENV`             | `development` or `production`              |
+| `CLOUDINARY_*`         | (Optional) Cloudinary credentials          |
+| `UPLOAD_PROVIDER`      | `local` or `cloudinary`                    |
 
-Express.js - Web framework
+### Client `.env`
 
-MongoDB - NoSQL database
+| Key           | Description                                  |
+|---------------|----------------------------------------------|
+| `VITE_PORT`   | Dev server port (default `5173`)             |
+| `VITE_API_URL`| Points to Express API (default `http://localhost:5000`) |
+| `VITE_APP_NAME` | Display name in the UI                     |
 
-Mongoose - MongoDB object modeling
+## Installation & Setup
 
-JWT - JSON Web Tokens for authentication
+```bash
+# Clone the repository created by GitHub Classroom
+git clone <your-repo-url>
+cd mern-stack
+```
 
-bcryptjs - Password hashing
+### Back End
 
-Cloudinary - Image upload and management
-
-Helmet - Security middleware
-
-Express Rate Limit - Rate limiting middleware
-
-Prerequisites
-Before running this application, make sure you have the following installed:
-
-Node.js (v18 or higher)
-
-MongoDB (local installation or MongoDB Atlas account)
-
-npm or yarn package manager
-
-Installation & Setup
-1. Clone the Repository
-bash
-git clone <https://github.com/PLP-MERN-Stack-Development/mern-stack-integration-emmumbua.githttps://github.com/PLP-MERN-Stack-Development/mern-stack-integration-emmumbua.git>
-cd mern-blog
-2. Backend Setup
-bash
-# Navigate to server directory
+```bash
 cd server
-
-# Install dependencies
 npm install
+npm run dev   # Runs with nodemon
+```
 
-# Set up environment variables
-cp .env.example .env
-Edit the .env file with your configuration:
+The Express API will start on `http://localhost:5000` by default.
 
-env
-NODE_ENV=development
-PORT=5000
-MONGODB_URI=mongodb://localhost:27017/mern-blog
-JWT_SECRET=your_super_secure_jwt_secret_key_change_in_production
-JWT_EXPIRE=30d
-CLOUDINARY_CLOUD_NAME=your_cloudinary_name
-CLOUDINARY_API_KEY=your_cloudinary_api_key
-CLOUDINARY_API_SECRET=your_cloudinary_api_secret
-3. Frontend Setup
-bash
-# Navigate to client directory
-cd ../client
+### Front End
 
-# Install dependencies
+Open a second terminal:
+
+```bash
+cd client
 npm install
-
-# Set up environment variables
-cp .env.example .env
-Edit the .env file:
-
-env
-VITE_API_BASE_URL=http://localhost:5000/api
-4. Database Setup
-Make sure MongoDB is running on your system:
-
-bash
-# If using local MongoDB
-mongod
-
-# Or use MongoDB Atlas connection string in MONGODB_URI
-Running the Application
-Development Mode
-Start the Backend Server:
-
-bash
-cd server
 npm run dev
-Server will run on http://localhost:5000
+```
 
-Start the Frontend Development Server:
+Vite will launch on `http://localhost:5173` (with proxy configured for `/api`).
 
-bash
-cd client
-npm run dev
-Client will run on http://localhost:3000
+## Usage Notes
 
-Production Build
-bash
-# Build the client
-cd client
-npm run build
+- The **first registered user** is automatically promoted to `admin`.
+- Subsequent signups default to the `customer` role.
+- Admins/Baristas can create and edit beverages, manage categories, and moderate comments.
+- Uploads are stored under `server/uploads`. Switch to Cloudinary by setting `UPLOAD_PROVIDER=cloudinary` and populating Cloudinary credentials.
 
-# Start production server (backend)
-cd ../server
-npm start
-Project Structure
-text
-mern-blog/
-├── client/                 # React frontend
-│   ├── public/            # Static files
-│   ├── src/
-│   │   ├── components/    # Reusable components
-│   │   │   ├── Layout/    # Layout components
-│   │   │   ├── Post/      # Post-related components
-│   │   │   └── Auth/      # Authentication components
-│   │   ├── pages/         # Page components
-│   │   ├── hooks/         # Custom React hooks
-│   │   ├── services/      # API services
-│   │   ├── context/       # React context providers
-│   │   └── App.jsx        # Main application component
-│   └── package.json
-├── server/                # Express backend
-│   ├── config/            # Configuration files
-│   ├── controllers/       # Route controllers
-│   ├── models/            # Mongoose models
-│   ├── routes/            # API routes
-│   ├── middleware/        # Custom middleware
-│   ├── utils/             # Utility functions
-│   ├── server.js          # Main server file
-│   └── package.json
-└── README.md
-API Endpoints
-Authentication
-POST /api/auth/register - User registration
+## API Overview
 
-POST /api/auth/login - User login
+| Method | Endpoint                         | Description                            | Auth |
+|--------|----------------------------------|----------------------------------------|------|
+| GET    | `/api/health`                    | Health check                           | Public |
+| POST   | `/api/auth/register`             | Register new user                      | Public |
+| POST   | `/api/auth/login`                | Login and receive JWT                  | Public |
+| POST   | `/api/auth/logout`               | Logout + clear cookie                  | Auth |
+| GET    | `/api/auth/me`                   | Current profile                        | Auth |
+| PUT    | `/api/auth/me`                   | Update profile                         | Auth |
+| GET    | `/api/posts`                     | List posts (supports `q`, `category`, `page`, `limit`, `sort`, `status`) | Public |
+| GET    | `/api/posts/:id`                 | Fetch post by ID                       | Public |
+| GET    | `/api/posts/slug/:slug`          | Fetch post by slug                     | Public |
+| POST   | `/api/posts`                     | Create post (multipart)                | Admin/Barista |
+| PUT    | `/api/posts/:id`                 | Update post (multipart)                | Admin/Barista |
+| DELETE | `/api/posts/:id`                 | Delete post                            | Admin/Barista |
+| POST   | `/api/posts/:id/toggle-like`     | Toggle like                            | Auth |
+| GET    | `/api/categories`                | List categories                        | Public |
+| POST   | `/api/categories`                | Create category                        | Admin/Barista |
+| PUT    | `/api/categories/:id`            | Update category                        | Admin/Barista |
+| DELETE | `/api/categories/:id`            | Delete category                        | Admin |
+| GET    | `/api/posts/:postId/comments`    | List comments for post                 | Public |
+| POST   | `/api/posts/:postId/comments`    | Add comment + rating                   | Auth |
+| DELETE | `/api/posts/:postId/comments/:commentId` | Remove comment                 | Owner/Admin |
 
-GET /api/auth/me - Get current user
+Validation errors return `422` with field-level details. All responses follow `{ success, data, message }` conventions.
 
-Posts
-GET /api/posts - Get all posts (with pagination, search, filter)
+## Testing Ideas
 
-GET /api/posts/:id - Get single post
+- **API**: Use Thunder Client / Postman against the routes above.
+- **Frontend**: Exercise forms (login/register, create/edit post), verify search/pagination, and confirm optimistic likes.
+- **Linting**: `npm run lint` (front end).
 
-POST /api/posts - Create new post (protected)
+## Deployment Considerations
 
-PUT /api/posts/:id - Update post (protected)
+- Configure environment variables using production-ready secrets.
+- Serve the built client (`npm run build`) via static hosting (Netlify, Vercel) and proxy to the Express API.
+- For image hosting, prefer Cloudinary or S3. Toggle by setting `UPLOAD_PROVIDER`.
+- Ensure HTTPS and secure cookies for production (`NODE_ENV=production`).
 
-DELETE /api/posts/:id - Delete post (protected)
 
-GET /api/posts/:id/comments - Get post comments
 
-Categories
-GET /api/categories - Get all categories
-
-POST /api/categories - Create category (protected/admin)
-
-PUT /api/categories/:id - Update category (protected/admin)
-
-DELETE /api/categories/:id - Delete category (protected/admin)
-
-Comments
-POST /api/comments - Create comment (protected)
-
-DELETE /api/comments/:id - Delete comment (protected)
-
-Database Models
-User
-name, email, password, avatar, role
-
-Post
-title, content, excerpt, featuredImage, author, categories, tags, isPublished, slug, viewCount
-
-Category
-name, description, color
-
-Comment
-content, author, post, parentComment, isApproved
-
-Authentication & Authorization
-JWT-based authentication
-
-Protected routes for post creation, editing, and deletion
-
-Role-based access control (user/admin)
-
-Password hashing with bcryptjs
-
-UI/UX Features
-Responsive design that works on all devices
-
-Clean, modern interface with intuitive navigation
-
-Loading states and error handling
-
-Optimistic UI updates for better user experience
-
-Form validation on both client and server side
-
-Deployment
-Backend Deployment (Heroku/Railway)
-Set environment variables in your hosting platform
-
-Deploy the server directory
-
-Ensure MongoDB connection string is properly set
-
-Frontend Deployment (Netlify/Vercel)
-Build the client: npm run build
-
-Deploy the dist folder
-
-Set environment variables for API base URL
-
-Environment Variables for Production
-env
-# Backend
-NODE_ENV=production
-MONGODB_URI=your_production_mongodb_uri
-JWT_SECRET=your_production_jwt_secret
-CLOUDINARY_*=# your_cloudinary_credentials
-
-# Frontend
-VITE_API_BASE_URL=your_deployed_backend_url/api
-Testing the Application
-Register a new user at /register
-
-Login with your credentials at /login
-
-Create a post at /create-post
-
-Browse posts at /posts
-
-View post details and add comments
-
-Edit/Delete your own posts
-
-Available Scripts
-Server Scripts
-bash
-npm run dev      # Start development server with nodemon
-npm start        # Start production server
-Client Scripts
-bash
-npm run dev      # Start development server
-npm run build    # Build for production
-npm run preview  # Preview production build
-
-Configuration
-MongoDB Connection
-Local: mongodb://localhost:27017/mern-blog
-
-Atlas: mongodb+srv://username:password@cluster.mongodb.net/mern-blog
-
-JWT Configuration
-Token expiration: 30 days
-
-Secret key should be strong and unique
-
-Cloudinary Setup
-Create a Cloudinary account
-
-Get your cloud name, API key, and API secret
-
-Add them to your environment variables
-
-Contributing
-Fork the repository
-
-Create a feature branch: git checkout -b feature/new-feature
-
-Commit your changes: git commit -m 'Add new feature'
-
-Push to the branch: git push origin feature/new-feature
-
-Submit a pull request
-
-License
-This project is licensed under the MIT License.
-
-Author
-
-Eunitah Mumbua

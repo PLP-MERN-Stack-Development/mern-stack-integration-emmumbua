@@ -1,0 +1,78 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.card-media {
+  border-radius: 16px;
+  overflow: hidden;
+  max-height: 220px;
+}
+
+.card-media img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.card-meta {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.card-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.4rem;
+}
+
+.card-excerpt {
+  color: #5a4633;
+  margin: 0 0 1rem;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.card-author {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  color: #6b2b06;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.btn.liked {
+  background: #ffe5d0;
+  color: #a54d16;
+}
+
+@media (max-width: 600px) {
+  .card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .card-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .card-actions .btn {
+    flex: 1;
+    text-align: center;
+  }
+}
+
